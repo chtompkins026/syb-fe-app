@@ -22,18 +22,30 @@ import Workouts from "./pages/workouts";
 import NavBar from "./components/NavBar/NavBar";
 import Layout from "./components/Layout/Layout";
 import InstructorProfile from "./components/InstructorProfile/InstructorProfile";
-import { auth } from "./services";
-
-
 
 const PrivateRoute = ({ component: Component, ...props }) => {
-  //TODO: Add authentication logic here
-  return auth.isAuthenticated() ? (
+  const token = localStorage.getItem("access_token");
+  const expiresAt = parseInt(localStorage.getItem("token_expires_at"));
+  const currentTime = Math.round(new Date().getTime() / 1000);
+
+  return token && expiresAt > currentTime ? (
     <Route {...props} component={Component} />
   ) : (
     <Redirect to="/login" />
   );
 };
+
+function reducer(state = {}, action) {
+  switch (action.type) {
+    case "SET_ACCESS_TOKEN":
+      return {
+        ...state,
+        userId: action.accessToken
+      };
+    default:
+      return state;
+  }
+}
 
 class App extends Component {
   render() {
