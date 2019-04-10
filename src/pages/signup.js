@@ -1,9 +1,20 @@
 import React, { useState } from "react";
 import { axiosInstance } from "../services";
-import Input from "../components/Input/Input";
 
-export default function Signup({history}) {
-  export default function Signup({ history }) {
+const Input = ({ errors, ...props }) => {
+  return (
+    <div>
+      <input {...props} />
+      <ul>
+        {errors.map(err => (
+          <li key={err}> {err} </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default function Signup({ history }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
