@@ -14,9 +14,9 @@ export default function Dashboard({ history }) {
         setClient(res.data);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
-    }, []);
+  }, []);
 
   const { first_name, last_name, bookings } = client;
 
