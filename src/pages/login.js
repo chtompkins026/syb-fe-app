@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { axiosInstance } from "../services";
-import { Input } from "../components/Input/Input" 
+import Input from "../components/Input/Input";
 
 import { connect } from "react-redux";
 
