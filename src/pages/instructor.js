@@ -18,7 +18,7 @@ export default class Instructors extends Component {
   componentDidMount() {
     this.setState({ isLoading: true });
     axios
-      .get("data.json")
+      .get(`/api/instructors`)
       .then(res => {
         this.setState({
           instructors: res.data.instructors,
