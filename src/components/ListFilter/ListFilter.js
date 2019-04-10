@@ -51,4 +51,9 @@ class ListFilter extends Component {
   }
 }
 
+ListFilter.propTypes = {
+  setFilter: PropTypes.func.isRequired,
+  options: PropTypes.array.isRequired
+};
+
 export default ListFilter;
