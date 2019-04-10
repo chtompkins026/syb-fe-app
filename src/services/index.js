@@ -1,53 +1,9 @@
-// import axios from "axios";
+import ax from "axios";
 
-export const axios = {
-  post() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => resolve(), 1000);
-    });
-  },
+ax.defaults.xsrfCookieName = "CSRF-TOKEN";
+ax.defaults.xsrfHeaderName = "X-CSRF-Token";
+ax.defaults.withCredentials = true;
 
-  get() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => resolve(), 1000);
-    });
-  }
-};
-
-export const auth = {
-  signup(name, email, password) {
-    localStorage.setItem("name", name);
-    localStorage.setItem("email", email);
-    localStorage.setItem("password", password);
-  },
-
-  login(email, password) {
-    const storedEmail = localStorage.getItem("email");
-    const storedPassword = localStorage.getItem("password");
-
-    if (email === storedEmail && storedPassword === password) {
-      return true;
-    }
-  },
-
-  logout() {
-    localStorage.removeItem("name");
-    localStorage.removeItem("email");
-    localStorage.removeItem("password");
-  },
-
-  isAuthenticated() {
-    if (localStorage.getItem("email") && localStorage.getItem("password")) {
-      return true;
-    }
-    return false;
-  }
-};
-
-// export const authAwareFetch = () => {
-//   this.headers = {}
-
-//   return axios.create({
-//     headers: this.headers
-//   })
-// }
+export const axiosInstance = ax.create({
+  baseURL: `http://localhost:3210`
+});
