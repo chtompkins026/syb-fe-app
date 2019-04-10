@@ -3,6 +3,18 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import "./App.css";
 
+import Home from "./pages/home";
+import About from "./pages/about";
+import Signup from "./pages/signup";
+import Login from "./pages/login";
+import Dashboard from "./pages/dashboard";
+import Instructors from "./pages/instructors";
+
+import NavBar from "./components/NavBar/NavBar";
+import Layout from "./components/Layout/Layout";
+import InstructorProfile from "./components/InstructorProfile/InstructorProfile";
+import { auth } from "./services";
+
 
 
 const PrivateRoute = ({ component: Component, ...props }) => {
