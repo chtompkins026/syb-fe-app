@@ -39,7 +39,7 @@ import Header from "../components/Header/Header";
               of other cultures, and we drink beer to celebrate this vibrant life of ours. </p>
 
             <h2> What Is SYB Fitness </h2>
-              <p>
+            <p> It is a great program </p>
         </div>
       );
     }
