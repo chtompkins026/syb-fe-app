@@ -1,10 +1,12 @@
 import React from "react"
+import Header from "../components/Header/Header";
 
   class About extends React.Component {
     render () {
       return(
-        <React.Fragment>
-          <h1> Surf Yoga Beer </h1>
+        <div className="about-page">
+          <div className="about-main">
+          <Header />
             <h2> Who We Are </h2>
               <p> Here at SurfYogaBeer, we create fitness adventures worldwide that
                 connect people from all over the world through a mutual love of surf yoga,
@@ -35,7 +37,10 @@ import React from "react"
               venturesome spirit. We work out to push ourselves past the barriers
               we build in our minds, we explore to appreciate the boundless experience
               of other cultures, and we drink beer to celebrate this vibrant life of ours. </p>
-        </React.Fragment>
+
+            <h2> What Is SYB Fitness </h2>
+              <p>
+        </div>
       );
     }
   }
