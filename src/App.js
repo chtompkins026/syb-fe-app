@@ -16,6 +16,8 @@ import Signup from "./pages/signup";
 import Login from "./pages/login";
 import Dashboard from "./pages/dashboard";
 import Instructors from "./pages/instructors";
+import Profile from "./pages/profile";
+import Workouts from "./pages/workouts";
 
 import NavBar from "./components/NavBar/NavBar";
 import Layout from "./components/Layout/Layout";
