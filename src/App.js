@@ -52,27 +52,27 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Router>
-          <>
-            <NavBar />
-            <Layout>
-              <Route exact path="/" component={Home} />
-              <Route path="/about" component={About} />
-              <Route exact path="/instructors" component={Instructors} />
-              <Route path="/instructors/:slug" component={InstructorProfile} />
-              <PrivateRoute path="/dashboard" component={Dashboard} />
-              <Route path="/login" component={Login} />
-              <Route path="/signup" component={Signup} />
-            </Layout>
-          </>
-        </Router>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div className="App">
+    <Router>
+      <Provider store={store}>
+        <NavBar />
+        <Layout>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route exact path="/instructors" component={Instructors} />
+            <Route path="/instructors/:slug" component={InstructorProfile} />
+            <PrivateRoute path="/dashboard" component={Dashboard} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/workouts" component={Workouts} />
+          </Switch>
+        </Layout>
+      </Provider>
+    </Router>
+  </div>
+);
 
 export default App;
