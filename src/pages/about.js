@@ -41,6 +41,7 @@ import Header from "../components/Header/Header";
             <h2> What Is SYB Fitness </h2>
             <p> It is a great program </p>
         </div>
+      </div>
       );
     }
   }
