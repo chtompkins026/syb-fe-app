@@ -1,2 +1,20 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+.dropdown-container {
+  max-height: 300px;
+  position: relative;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 30px;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.dropdown-selected,
+.dropdown-option {
+  height: 30px;
+  width: 300px;
+  border: 1px solid grey;
+  border-radius: 3px;
+  cursor: pointer;
+}
