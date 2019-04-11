@@ -1,4 +1,20 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+App for SurfYogaBeer Fitness Classes 
+
+##Demo https://www.youtube.com/watch?v=lApq0payyIU
+
+##Contributing to SYB App requests, features, and bug reports are always welcome on GitHub at <>. This project follows the Contributor Covenant's Code of Conduct for Open Source Projects.
+
+##License Copyright 2019 Chris Tompkins
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+## Overview: This is a fitness booking app for SurfYogaBeer. A company that leads fitness trips around the globe. Users can sign up and login, explore their favorite instructors and book classes. The project is still a work in progress, so stay tuned for more updates. 
+
+## IMPORTANT NOTE 
+  
+  This project connects to a backend API. In order to fully run the project, you need to also run the backend API on a local host. Soon, I will be posting this on Heroku: https://github.com/chtompkins026/syb_run_api
 
 ## Available Scripts
 
