@@ -1,5 +1,7 @@
 .navbar {
-  background: lightcoral;
+  display: grid; 
+  grid-template-columns: repeat(7, 1fr);
+  background: #26a0da;
   height: 50px;
   width: 100%;
   position: absolute;
@@ -10,4 +12,31 @@
 .navbar-menu {
   display: flex;
   list-style-type: none;
+  grid-column: -1;
+  justify-items: center;
+  align-content: center;
+  grid-column-start: 3;
+  grid-column-end: 8;
+}
+
+.navbar-link {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  
+}
+
+.navlinks {
+  text-decoration: none;
+  color: #314755;
+}
+.navlinks:hover {
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+.nav-image{
+  align-self: center;
+  justify-self: center;
+  width: 20%; 
 }
