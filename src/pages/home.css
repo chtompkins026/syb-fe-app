@@ -1,0 +1,117 @@
+.wrapper {
+  display: grid;
+  grid-gap: 10px;
+  height:     auto;       /* These two lines were the key. */
+  min-height: 100%;
+  /*overflow:   hidden;*/ /* Do not use this, it crops in small browsers. */
+  margin:     0px auto;
+  padding:    0px auto;
+}
+
+.top {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-areas:
+    "hero hero"
+    "hero hero"
+}
+
+.hero {
+  grid-area: hero;
+  min-height: 400px;
+  background: black url(/public/banner.jpg);
+  background-size: cover;
+  background-position: bottom right;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}
+
+.hero > * {
+  background: var(--yellow);
+  padding: 5px;
+}
+
+/* Features! */
+
+.features {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.feature {
+  background: white;
+  padding: 10px;
+  border: 1px solid rgb(167, 163, 163);
+  text-align: center;
+  box-shadow: 0 0 4px  rgba(0,0,0,0.1);
+}
+
+.feature .icon {
+  font-size: 50px;
+}
+.feature p {
+  color: rgba(0,0,0,0.5);
+}
+
+/* About Section */
+
+.about {
+  background: white;
+  padding:50px;
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  align-items: center;
+}
+
+/* Gallery! */
+
+.gallery {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.gallery img {
+  width: 100%;
+}
+
+.gallery h2 {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-gap: 20px;
+  align-items: center;
+}
+
+.gallery h2:before, .gallery h2:after {
+  display: block;
+  content: '';
+  height: 10px;
+  background: linear-gradient(to var(--direction, left), var(--yellow), transparent);
+}
+
+.gallery h2:after {
+  --direction: right;
+}
+
+@media (max-width: 700px) {
+  .top {
+    grid-template-areas:
+      "hero hero"
+  }
+  /* About */
+  .about {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .top {
+    grid-template-areas:
+      "hero"
+  }
+}
