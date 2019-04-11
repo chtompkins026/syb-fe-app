@@ -1,0 +1,22 @@
+.main-div {
+  align-items: flex-end;
+  display: flex;
+  width: 69rem;
+  max-width: 100%;
+  margin-bottom: 10rem;
+}
+.h3-header {
+  opacity: 1;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+  color: gray;
+}
+
+.h2-header {
+  opacity: 1;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+}
+
+.p-tagline {
+  opacity: 1;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+}
