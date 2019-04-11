@@ -1,11 +1,12 @@
 import React from "react"
 import Header from "../components/Header/Header";
+import "./about.css";
 
   class About extends React.Component {
     render () {
       return(
-        <div className="about-page">
-          <div className="about-main">
+        <div className="about-container">
+        
           <Header />
             <h2> Who We Are </h2>
               <p> Here at SurfYogaBeer, we create fitness adventures worldwide that
@@ -40,7 +41,6 @@ import Header from "../components/Header/Header";
 
             <h2> What Is SYB Fitness </h2>
             <p> It is a great program </p>
-        </div>
       </div>
       );
     }
