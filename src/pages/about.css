@@ -1,6 +1,20 @@
 .about-container{
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 10px;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: 1fr 2fr;
+  align-items: stretch;
 }
+
+.about-header{
+  margin-top: 2%;
+  background: #BADA55;
+  grid-column: 1/ span 3;
+}
+
+.about-item{
+  background: #26a0da;
+  align-content: center;
+  justify-content: center;
+}
+

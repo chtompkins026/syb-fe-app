@@ -6,8 +6,10 @@ import "./about.css";
     render () {
       return(
         <div className="about-container">
-        
-          <Header />
+          <div className="about-header"> 
+            <Header />
+          </div>
+          <div className="about-item">
             <h2> Who We Are </h2>
               <p> Here at SurfYogaBeer, we create fitness adventures worldwide that
                 connect people from all over the world through a mutual love of surf yoga,
@@ -21,15 +23,19 @@ import "./about.css";
                 experiences that you never imagined possible, and a community of
                 people that love sweat-filled days and beer-filled nights just
                 as much as you do. </p>
-            <h2> What We Stand For </h2>
-              <p> We are a company that is community-oriented, creating family
-              in every paradise we venture to. SYB strives to create an environment
-               that is meditative, open-minded, and bold. We focus on a balanced
-              lifestyle of workin’ the bod during the day and twerkin’ the bod during
-              the night. Surf allows us to appreciate this beautiful world of ours,
-              yoga helps us remain present and thoughtful, and beer... because you know…
-              it’s not the bottled water making us drop it low. </p>
-
+            </div>
+            <div className="about-item">
+              <h2> What We Stand For </h2>
+                <p> We are a company that is community-oriented, creating family
+                in every paradise we venture to. SYB strives to create an environment
+                that is meditative, open-minded, and bold. We focus on a balanced
+                lifestyle of workin’ the bod during the day and twerkin’ the bod during
+                the night. Surf allows us to appreciate this beautiful world of ours,
+                yoga helps us remain present and thoughtful, and beer... because you know…
+                it’s not the bottled water making us drop it low. </p>
+            </div>
+            <div className="about-item">
+              <h2> What Is SYB Fitness </h2>
               <p> Our adventures at SYB follow a simple mission: We detox to retox.
               This means we put value in bettering our bodies and minds while also
               enjoying the pleasures of life (beer). We go on excursions worldwide
@@ -38,10 +44,8 @@ import "./about.css";
               venturesome spirit. We work out to push ourselves past the barriers
               we build in our minds, we explore to appreciate the boundless experience
               of other cultures, and we drink beer to celebrate this vibrant life of ours. </p>
-
-            <h2> What Is SYB Fitness </h2>
-            <p> It is a great program </p>
-      </div>
+            </div> 
+        </div>
       );
     }
   }

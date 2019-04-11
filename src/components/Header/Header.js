@@ -8,8 +8,8 @@ class Header extends React.Component {
   const { tagline } = this.props;
 
   return (
-    <header className="top">
-      <img className="header-image" src={"syb_logo.png"} alt="SYB Logo" />
+    <header className="header-top">
+      <img className="header-image" src={"favicon.png"} alt="SYB Logo" />
       <h3 className="tagline">
         <span> {tagline ? tagline : ""}</span>
       </h3>

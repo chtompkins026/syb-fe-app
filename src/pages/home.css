@@ -60,7 +60,10 @@
 /* About Section */
 
 .about {
-  background: white;
+  background: url('../img/yoga.jpg');
+  background-size: cover;
+  background-position: bottom left;
+  background-repeat: no-repeat;
   padding:50px;
   display: grid;
   grid-template-columns: 400px 1fr;

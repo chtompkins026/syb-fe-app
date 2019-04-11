@@ -19,7 +19,7 @@ class Home extends React.Component {
 
       <section className="features">
         <div className="feature">
-          <span className="icon">🌮</span>
+          <span className="icon">🌮 </span> 
           <h3>Travel</h3>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, assumenda.</p>
         </div>
