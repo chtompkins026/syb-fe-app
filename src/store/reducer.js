@@ -1,28 +1,25 @@
 import * as actionTypes from './actions';
 
-function reducer(state = {}, action) {
+const initialState = {
+  user: {}, 
+  clientId:""
+};
+ 
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SET_ACCESS_TOKEN:
+    case actionTypes.SET_LOGIN_SUCCESSFUL:
       return {
         ...state,
-        userId: action.accessToken
-      }
-    case actionTypes.SET_CLIENT_ID: 
-      return {
-        ...state, 
-        clientID: action.cleintID 
+        ...action.payload
       }
     case actionTypes.REMOVE_ACCESS_TOKEN: 
         return {
           ...state,
-          userId: state.userId.filter(userId => userId !== action.accessToken)
-      }
-    case actionTypes.REMOVE_CLIENT_ID: 
-      return {
-        ...state, 
-        clientID: state.clientID.filter(clientID => clientID !== action.cleintID)
+          user: {},
+          accessToken: ""
       }
     }
+    
     return state;
   }; 
 

@@ -2,19 +2,6 @@ import React, { useState, Component } from "react";
 import { axiosInstance } from "../services";
 import Input from "../components/Input/Input"
 
-// const Input = ({ errors, ...props }) => {
-//   return (
-//     <div>
-//       <input {...props} />
-//       <ul>
-//         {errors.map(err => (
-//           <li key={err}> {err} </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
-
 class Signup extends Component{
 
   constructor(props){

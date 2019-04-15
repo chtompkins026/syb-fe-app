@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { connect } from 'react-redux';
 import { axiosInstance } from "../services";
 import { DateTime } from "luxon";
 
-export default function Dashboard({ history }) {
+function Dashboard({ history, user, accessToken }) {
   const [client, setClient] = useState({
     bookings: []
   });
 
   useEffect(() => {
     axiosInstance
-      .get(`/api/clients/1`) //TODO: the ID is hardcoded
+      .get(`/api/clients/${user.id}`) //TODO: the ID is hardcoded
       .then(res => {
+        console.log("this is the res data", res.data);
         setClient(res.data);
       })
       .catch(err => {
@@ -18,7 +20,7 @@ export default function Dashboard({ history }) {
       });
   }, []);
 
-  const { first_name, last_name, bookings } = client;
+  const { id, phone, instagram, first_name, last_name, bookings } = client;
 
   return (
     <div>
@@ -39,8 +41,14 @@ export default function Dashboard({ history }) {
         Log out
       </button>
       <div>
-        <div>{first_name}</div>
-        <div>{last_name}</div>
+        <div className="dashboardHeader">
+          <h1> {first_name} </h1> 
+          <h2>{last_name}</h2> 
+        </div>
+        <div className="dashboardOthers">
+          <h3> Phone Number: {phone} </h3> 
+          <h3> Instagram Handle: {instagram}</h3> 
+        </div>
         <ul>
           {bookings.map(({ id, start, cost, status }) => (
             <li key={id}>
@@ -51,7 +59,7 @@ export default function Dashboard({ history }) {
               </div>
               <div>COST: {cost}</div>
               <div>{status}</div>
-              <button> UPDATE </button>
+              <button> CHANGE RESERVATION </button>
             </li>
           ))}
         </ul>
@@ -59,3 +67,12 @@ export default function Dashboard({ history }) {
     </div>
   );
 }
+
+const mapStateToProps = state => {
+  return {
+      user: state.user,
+      accessToken: state.accessToken
+  };
+};
+
+export default connect(mapStateToProps)(Dashboard)

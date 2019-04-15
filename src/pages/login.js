@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { axiosInstance } from "../services";
+import Input from "../components/Input/Input";
 
 import { connect } from "react-redux";
+import * as actionTypes from '../store/actions';
 
-// TODO: put Input component in a new file
-const Input = ({ ...props }) => {
-  return (
-    <div>
-      <input {...props} />
-    </div>
-  );
-};
+const loginSuccess = (payload) => {
+  return {
+    type: actionTypes.SET_LOGIN_SUCCESSFUL,
+    payload
+  }
+}
 
-function Login({ history, dispatch }) {
+
+function Login({ history, loginSuccess }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,6 +25,7 @@ function Login({ history, dispatch }) {
         axiosInstance
           .post("/oauth/token", { email, password, grant_type: "password" })
           .then(res => {
+            console.log("This is the res data", res.data);
             localStorage.setItem("access_token", res.data.access_token);
             localStorage.setItem("refresh_token", res.data.refresh_token);
 
@@ -34,12 +36,11 @@ function Login({ history, dispatch }) {
 
             axiosInstance.defaults.headers.common["Authorization"] =
               res.data.access_token;
-
-            dispatch({
-              type: "SET_ACCESS_TOKEN",
-              accessToken: res.data.access_token
+            
+            loginSuccess({
+              accessToken: res.data.access_token,
+              user: res.data.result
             });
-
             history.push("/dashboard");
           })
           .catch(err => {
@@ -67,4 +68,16 @@ function Login({ history, dispatch }) {
   );
 }
 
-export default connect()(Login);
+// const mapStateToProps = state => {
+//   return {
+//       prs: state.persons
+//   };
+// };
+
+const mapDispatchToProps = dispatch => {
+  return {
+    loginSuccess: (payload) => dispatch(loginSuccess(payload))
+  }
+};
+
+export default connect(null, mapDispatchToProps)(Login);

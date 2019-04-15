@@ -42,7 +42,7 @@ class Home extends React.Component {
 
       <section className="about">
         <img src="https://source.unsplash.com/random/201x201" alt="" className="about__mockup" /> 
-        <div className3="about__details">
+        <div className="about__details">
           <h2> About SurfYogaBeer </h2>
           <p>We run curated athletic adventures around the world</p>
           <p>Bringing people together through fitness and beer </p>

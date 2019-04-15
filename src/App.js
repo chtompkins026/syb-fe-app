@@ -23,6 +23,8 @@ import NavBar from "./components/NavBar/NavBar";
 import Layout from "./components/Layout/Layout";
 import InstructorProfile from "./components/InstructorProfile/InstructorProfile";
 
+import reducer from "./store/reducer"; 
+
 const PrivateRoute = ({ component: Component, ...props }) => {
   const token = localStorage.getItem("access_token");
   const expiresAt = parseInt(localStorage.getItem("token_expires_at"));
@@ -35,17 +37,17 @@ const PrivateRoute = ({ component: Component, ...props }) => {
   );
 };
 
-function reducer(state = {}, action) {
-  switch (action.type) {
-    case "SET_ACCESS_TOKEN":
-      return {
-        ...state,
-        userId: action.accessToken
-      };
-    default:
-      return state;
-  }
-}
+// function reducer(state = {}, action) {
+//   switch (action.type) {
+//     case "SET_ACCESS_TOKEN":
+//       return {
+//         ...state,
+//         userId: action.accessToken
+//       };
+//     default:
+//       return state;
+//   }
+// }
 
 const store = createStore(
   reducer,
