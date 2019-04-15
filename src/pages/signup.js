@@ -91,9 +91,6 @@ class Signup extends Component{
     >
 
       <h2>Sign up</h2>
-      {/* {errors.map((err)=> {
-        return (<div style={{color: 'red'}}>{err}</div>)
-      })} */}
       <Input
         errors={errors['name'] || []}
         type="text"
