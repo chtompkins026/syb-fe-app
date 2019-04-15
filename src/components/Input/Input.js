@@ -6,7 +6,8 @@ const Input = ({ errors, ...props }) => {
       <input {...props} />
       <ul>
         {errors.map(err => (
-          <li key={err}> {err} </li>
+          <li style
+          ={{color: 'red', fontSize: '16px'}} key={err}> {err} </li>
         ))}
       </ul>
     </div>

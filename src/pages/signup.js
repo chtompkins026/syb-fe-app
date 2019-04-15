@@ -1,26 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
 import { axiosInstance } from "../services";
+import Input from "../components/Input/Input"
 
-const Input = ({ errors, ...props }) => {
-  return (
-    <div>
-      <input {...props} />
-      <ul>
-        {errors.map(err => (
-          <li key={err}> {err} </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
+// const Input = ({ errors, ...props }) => {
+//   return (
+//     <div>
+//       <input {...props} />
+//       <ul>
+//         {errors.map(err => (
+//           <li key={err}> {err} </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// };
 
-export default function Signup({ history }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+class Signup extends Component{
 
-  const [errors, setErrors] = useState({ password: [] });
+  constructor(props){
+    super(props)
+    this.state = {
+      name: "",
+      email: "",
+      password: "",
+      errors: ""
+    }
+  }
 
+  handleChange = (e) => {
+    e.preventDefault();
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  render(){
+  const { history } = this.props
+  const { name, email, password, errors } = this.state
+ 
   const validateForm = () => {
     let errors = { password: [] };
 
@@ -40,7 +57,7 @@ export default function Signup({ history }) {
         e.preventDefault();
         const errors = validateForm();
         if (errors.password.length > 0) {
-          setErrors(errors);
+          this.setState({errors});
           return;
         }
 
@@ -56,36 +73,55 @@ export default function Signup({ history }) {
           })
           .catch(err => {
             //TODO: handle error and provide error message and clear form
-            console.log(err.response.data.errors);
+            // console.log(err.response.data.errors);
+            let errorResponse = err.response.data.errors; 
+            console.log(errorResponse);
+            Object.keys(errorResponse).map((key, index) => {
+              const errors = {...this.state.errors}
+    
+              this.setState({
+                errors: {...errors, [key]: errorResponse[key]},
+                name: "",
+                email: "",
+                password: ""
+              })
+            });
           });
       }}
     >
+
       <h2>Sign up</h2>
+      {/* {errors.map((err)=> {
+        return (<div style={{color: 'red'}}>{err}</div>)
+      })} */}
       <Input
-        errors={[]}
+        errors={errors['name'] || []}
         type="text"
         placeholder="name"
         name="name"
         value={name}
-        onChange={e => setName(e.target.value)}
+        onChange={this.handleChange}
       />
       <Input
-        errors={[]}
+        errors={errors['email'] || []}
         type="text"
         placeholder="email"
         name="email"
         value={email}
-        onChange={e => setEmail(e.target.value)}
+        onChange={this.handleChange}
       />
       <Input
-        errors={errors.password}
+        errors={errors.password || []}
         type="password"
         placeholder="password"
         name="password"
         value={password}
-        onChange={e => setPassword(e.target.value)}
+        onChange={this.handleChange}
       />
       <button type="submit"> SUBMIT </button>
     </form>
   );
+    }
 }
+
+export default Signup
