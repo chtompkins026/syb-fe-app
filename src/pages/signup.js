@@ -56,7 +56,7 @@ export default function Signup({ history }) {
           })
           .catch(err => {
             //TODO: handle error and provide error message and clear form
-            console.error(err);
+            console.log(err.response.data.errors);
           });
       }}
     >

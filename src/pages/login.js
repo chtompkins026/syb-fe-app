@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { axiosInstance } from "../services";
-import Input from "../components/Input/Input";
 
 import { connect } from "react-redux";
+
+// TODO: put Input component in a new file
+const Input = ({ ...props }) => {
+  return (
+    <div>
+      <input {...props} />
+    </div>
+  );
+};
 
 function Login({ history, dispatch }) {
   const [email, setEmail] = useState("");
