@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { DateTime } from "luxon";
 import map from "lodash.map";
 import { Portal } from "react-portal";
+import { connect } from 'react-redux';
 
 import ListFilter from "../components/ListFilter/ListFilter";
 
@@ -46,7 +47,9 @@ const ModalContent = styled.div`
   background: white;
 `;
 
-const Workouts = ({ history }) => {
+const Workouts = ({ history, clientData}) => {
+  console.log("this is the clientData", clientData);
+  
   const [workouts, setWorkouts] = useState([]);
   const [workoutFilter, setWorkoutFilter] = useState("");
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
@@ -101,7 +104,7 @@ const Workouts = ({ history }) => {
       refunded: null,
       instructor_id: schedule.instructor_id,
       schedule_id: schedule.id,
-      client_id: 1 //TODO: not hardcode the client_id (pass it to the browser)
+      client_id: clientData.id 
     };
 
     axiosInstance
@@ -196,4 +199,14 @@ const Workouts = ({ history }) => {
   );
 };
 
-export default Workouts;
+  const mapStateToProps = state => {
+    return {
+        user: state.user,
+        accessToken: state.accessToken,
+        clientData: state.client
+    };
+  };
+
+
+export default connect(mapStateToProps)(Workouts);
+
