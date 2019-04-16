@@ -52,8 +52,7 @@ class Signup extends Component{
           .post("/api/users", {
             name,
             email,
-            password,
-            account_type: "1"
+            password
           })
           .then(res => {
             history.push("/profile", { id: res.data.id });
