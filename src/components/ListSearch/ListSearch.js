@@ -7,7 +7,7 @@ export default class ListSearch extends Component {
 
   render(){
     const { inputValue } = this.state;
-    const { updateSeach } = this.props;
+    const { updateSearch } = this.props;
 
     return (
       <div>
@@ -16,7 +16,7 @@ export default class ListSearch extends Component {
           onChange={e => {
             const inputValue = e.target.value;
             this.setState({ inputValue });
-            updateSeach(inputValue);
+            updateSearch(inputValue);
           }}
           />
       </div>
