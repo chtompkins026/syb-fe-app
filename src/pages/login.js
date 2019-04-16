@@ -39,7 +39,8 @@ function Login({ history, loginSuccess }) {
             
             loginSuccess({
               accessToken: res.data.access_token,
-              user: res.data.result
+              user: res.data.result, 
+              client: res.data.extra  
             });
             history.push("/dashboard");
           })
