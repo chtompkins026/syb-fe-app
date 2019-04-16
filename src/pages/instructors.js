@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { axiosInstance } from "../services";
 import { Link } from "react-router-dom";
 
 import ListFilter from "../components/ListFilter/ListFilter";
@@ -7,7 +8,7 @@ import ListSearch from "../components/ListSearch/ListSearch";
 
 export default class Instructors extends Component {
   state = {
-    regions: ["New York", "New Jersey", "Boston"],
+    regions: ["New York", "New Jersey", "Boston","all"],
     instructors: [],
     isLoading: false,
     hasError: false,
@@ -17,18 +18,19 @@ export default class Instructors extends Component {
 
   componentDidMount() {
     this.setState({ isLoading: true });
-    axios
-      .get(`/api/instructors`)
-      .then(res => {
-        this.setState({
-          instructors: res.data.instructors,
-          isLoading: false,
-          hasError: false
+      axiosInstance
+        .get(`/api/instructors`)
+        .then(res => {
+          console.log("This is the res data on instructors", res);
+          this.setState({
+            instructors: res.data,
+            isLoading: false,
+            hasError: false
+          });
+        })
+        .catch(err => {
+          this.setState({ isLoading: false, hasError: true });
         });
-      })
-      .catch(err => {
-        this.setState({ isLoading: false, hasError: true });
-      });
   }
 
   setFilter = filter => {
@@ -51,7 +53,7 @@ export default class Instructors extends Component {
 
     let computedInstructors = instructors;
 
-    if (regionFilter) {
+    if (regionFilter && regionFilter !== "all") {
       computedInstructors = computedInstructors.filter(
         ({ region }) => region === regionFilter
       );
@@ -68,28 +70,28 @@ export default class Instructors extends Component {
     }
 
     const searchedName = searchTerm.trim().toLowerCase();
-    computedInstructors = computedInstructors.filter(({ name }) => {
-      return name.toLowerCase().includes(searchedName);
+    computedInstructors = computedInstructors.filter(({ first_name, last_name }) => {
+      return (`${first_name} ${last_name}`).toLowerCase().includes(searchedName);
     });
 
     if (!isLoading && !hasError) {
       component = computedInstructors.map(
-        ({ name, age, bio, region, slug }) => (
+        ({ first_name, last_name, age, bio, region, slug }) => (
           <Link
             to={{
               pathname: `/instructors/${slug}`,
               state: {
-                name,
+                name: `${first_name} ${last_name}`,
                 age,
                 bio,
                 region
               }
             }}
-            key={name}
+            key={`${first_name} ${last_name}`}
           >
             <div style={{ border: "1px solid black" }}>
-              <div>{name}</div>
-              <div>{region}</div>
+              <div>{`${first_name} ${last_name}`}</div>
+              <div>{bio}</div>
               <br />
             </div>
           </Link>
