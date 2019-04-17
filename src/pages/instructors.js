@@ -3,6 +3,8 @@ import axios from "axios";
 import { axiosInstance } from "../services";
 import { Link } from "react-router-dom";
 
+import "./instructor.css";
+
 import ListFilter from "../components/ListFilter/ListFilter";
 import ListSearch from "../components/ListSearch/ListSearch";
 
@@ -89,9 +91,10 @@ export default class Instructors extends Component {
             }}
             key={`${first_name} ${last_name}`}
           >
-            <div style={{ border: "1px solid black" }}>
+            <div className="instructorContainer">
               <div>{`${first_name} ${last_name}`}</div>
               <div>{bio}</div>
+              <div>{region}</div>
               <br />
             </div>
           </Link>

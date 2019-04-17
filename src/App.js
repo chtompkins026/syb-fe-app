@@ -66,9 +66,9 @@ const App = () => (
             <Route exact path="/instructors" component={Instructors} />
             <Route path="/instructors/:slug" component={InstructorProfile} />
             <PrivateRoute path="/dashboard" component={Dashboard} />
-            <Route path="/login" component={Login} />
+            <Route path="/login" render={() => localStorage.getItem('clientID')? <Redirect to="/dashboard"/>: <Login/>} />
             <Route path="/signup" component={Signup} />
-            <Route path="/profile" component={Profile} />
+            <PrivateRoute path="/profile" component={Profile} />
             <Route path="/workouts" component={Workouts} />
           </Switch>
         </Layout>

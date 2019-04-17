@@ -28,6 +28,7 @@ const Profile = ({
             })
             .then(res => {
               console.log(res);
+              localStorage.setItem("clientID", res.data.id);
               history.push("/dashboard");
             })
             .catch(err => {

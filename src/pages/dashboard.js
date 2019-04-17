@@ -4,16 +4,16 @@ import { axiosInstance } from "../services";
 import { DateTime } from "luxon";
 import "./dashboard.css";
 
-function Dashboard({ history, user, clientData, accessToken }) {
+function Dashboard({ history, user, accessToken }) {
   const [client, setClient] = useState({
     bookings: []
   });
 
-  console.log("This is the data available in user", clientData);
-
   useEffect(() => {
+    const id = localStorage.getItem("clientID"); 
+
     axiosInstance
-      .get(`/api/clients/${clientData.id}`) 
+      .get(`/api/clients/${id}`) 
       .then(res => {
         console.log("this is the res data", res.data);
         setClient(res.data);
@@ -69,7 +69,8 @@ function Dashboard({ history, user, clientData, accessToken }) {
             .then(res => {
               localStorage.removeItem("access_token");
               localStorage.removeItem("refresh_token");
-              history.push("/login");
+              localStorage.removeItem("clientID"); 
+              window.location.reload();
             })
             .catch(err => {
               console.error(err);

@@ -10,7 +10,8 @@ export default class ListSearch extends Component {
     const { updateSearch } = this.props;
 
     return (
-      <div>
+      <div className="listSearchContainer">
+        <h3 className="h3List"> Search Instructor: </h3>
         <input
           value={inputValue}
           onChange={e => {

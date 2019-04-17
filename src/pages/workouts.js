@@ -47,9 +47,9 @@ const ModalContent = styled.div`
   background: white;
 `;
 
-const Workouts = ({ history, clientData}) => {
-  console.log("this is the clientData", clientData);
-  
+const Workouts = ({ history}) => {
+  const clientId = localStorage.getItem("clientID");
+
   const [workouts, setWorkouts] = useState([]);
   const [workoutFilter, setWorkoutFilter] = useState("");
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
@@ -104,7 +104,7 @@ const Workouts = ({ history, clientData}) => {
       refunded: null,
       instructor_id: schedule.instructor_id,
       schedule_id: schedule.id,
-      client_id: clientData.id 
+      client_id: clientId
     };
 
     axiosInstance

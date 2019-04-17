@@ -42,7 +42,10 @@ function Login({ history, loginSuccess }) {
               user: res.data.result, 
               client: res.data.extra  
             });
-            history.push("/dashboard");
+
+            localStorage.setItem("clientID", res.data.extra.id); 
+
+            window.location.reload();
           })
           .catch(err => {
             console.error(err);
