@@ -1,0 +1,33 @@
+.instructorContainer{
+  background: #E0FFFF ;
+  grid-gap: 20px;
+  height: 70px;
+  border: .5px dotted var(--yellow);
+  text-decoration: none;
+  margin: 2px;
+  padding: 10px;
+}
+
+.instructorData {
+  text-decoration: none;
+  font-size: 14px;
+  text-align: left;
+}
+
+a {
+  text-decoration: none;
+  font-size: 14px;
+  color: blue; 
+  font-weight: lighter;
+}
+
+.instructorHighLight{
+  font-size: 15px;
+  color: black;
+  font-weight: normal;
+}
+
+.container{
+  display: grid;
+  grid-gap: 5px
+}
