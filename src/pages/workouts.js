@@ -47,7 +47,7 @@ const ModalContent = styled.div`
   background: white;
 `;
 
-const Workouts = ({ history}) => {
+const Workouts = ({ history, clientData }) => {
   const clientId = localStorage.getItem("clientID");
 
   const [workouts, setWorkouts] = useState([]);
@@ -104,7 +104,7 @@ const Workouts = ({ history}) => {
       refunded: null,
       instructor_id: schedule.instructor_id,
       schedule_id: schedule.id,
-      client_id: clientId
+      client_id: clientData.id
     };
 
     axiosInstance
