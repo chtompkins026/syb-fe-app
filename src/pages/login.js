@@ -3,7 +3,7 @@ import { axiosInstance } from "../services";
 import Input from "../components/Input/Input";
 
 import { connect } from "react-redux";
-import * as actionTypes from '../store/actions';
+import * as actionTypes from '../store/actions/actionTypes';
 
 const loginSuccess = (payload) => {
   return {

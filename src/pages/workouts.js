@@ -203,7 +203,7 @@ const Workouts = ({ history, clientData }) => {
     return {
         user: state.user,
         accessToken: state.accessToken,
-        clientData: state.client
+        clientData: state.client.clientData
     };
   };
 

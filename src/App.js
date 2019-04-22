@@ -25,8 +25,9 @@ import NavBar from "./components/NavBar/NavBar";
 import Layout from "./components/Layout/Layout";
 import InstructorProfile from "./components/InstructorProfile/InstructorProfile";
 
-import mainReducer from './store/reducers/reducer';
+import clientReducer from './store/reducers/clientReducer';
 import classReducer from './store/reducers/classesReducer';
+import spinnerReducer from './store/reducers/spinnerReducer';
 
 const PrivateRoute = ({ component: Component, ...props }) => {
   const token = localStorage.getItem("access_token");
@@ -44,11 +45,12 @@ const PrivateRoute = ({ component: Component, ...props }) => {
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-    reducer: mainReducer,
-    classReducer: classReducer
+    client: clientReducer,
+    classes: classReducer,
+    spinner: spinnerReducer
 });
 
-const store = createStore(rootReducer, composeEnhancers(
+const store = createStore(rootReducer, {}, composeEnhancers(
     applyMiddleware(thunk)
 ));
 
