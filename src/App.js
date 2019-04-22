@@ -25,7 +25,8 @@ import NavBar from "./components/NavBar/NavBar";
 import Layout from "./components/Layout/Layout";
 import InstructorProfile from "./components/InstructorProfile/InstructorProfile";
 
-import reducer from "./store/reducer"; 
+import mainReducer from './store/reducers/reducer';
+import classReducer from './store/reducers/classesReducer';
 
 const PrivateRoute = ({ component: Component, ...props }) => {
   const token = localStorage.getItem("access_token");
@@ -39,23 +40,17 @@ const PrivateRoute = ({ component: Component, ...props }) => {
   );
 };
 
-const logger = store => {
-  return next => {
-      return action => {
-          console.log('[Middleware] Dispatching', action);
-          const result = next(action);
-          console.log('[Middleware] next state', store.getState());
-          return result;
-      }
-  }
-};
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(
-   reducer,
-   composeEnhancers(applyMiddleware(logger, thunk))
-   );
+const rootReducer = combineReducers({
+    reducer: mainReducer,
+    classReducer: classReducer
+});
+
+const store = createStore(rootReducer, composeEnhancers(
+    applyMiddleware(thunk)
+));
 
 const App = () => (
   <div className="App">
