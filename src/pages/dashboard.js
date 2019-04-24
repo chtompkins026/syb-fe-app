@@ -5,6 +5,7 @@ import { DateTime } from "luxon";
 import "./dashboard.css";
 import { initClient, removeClass } from "../store/actions/clientBuilder";
 import Spinner from "../components/Spinner/Spinner"; 
+import LikeButton from "../components/LikeButton/LikeButton";
 
 
 class Dashboard extends Component {
@@ -18,8 +19,8 @@ class Dashboard extends Component {
     if(loading){
       return <Spinner />
     }
-
-    return (
+    
+        return (
       <div className="container">
         <div className="dashboard">
           <div className="dashboardHeader">
@@ -56,7 +57,12 @@ class Dashboard extends Component {
                   </div>
                   <div>COST: {cost}</div>
                   <div>{status}</div>
-                  <button onClick={() => this.props.removeClass(id)}> DELETE RESERVATION </button>
+                  <button onClick={() => {
+                    console.log('A')
+                    this.props.removeClass(id)
+                    console.log('B')
+                  }}> DELETE RESERVATION </button>
+                  <LikeButton/>
                 </li>
               ))}
             </ul>

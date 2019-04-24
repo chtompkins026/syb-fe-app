@@ -42,12 +42,14 @@ export const initClient = () => {
 };
 
 export const removeClass = (bookingId) => {
+    console.log('C')
     return dispatch => {
         const id = localStorage.getItem("clientID"); 
         dispatch(setLoading(true));
         axiosInstance
           .delete(`/api/bookings/${bookingId}`) 
               .then( response => {
+                  console.log('D')
                 dispatch(setLoading(false));
                  dispatch(removedClass(bookingId));
               } )
@@ -56,4 +58,5 @@ export const removeClass = (bookingId) => {
                   dispatch(fetchClientFailed());
               } );
       };
+      console.log('E')
 }
