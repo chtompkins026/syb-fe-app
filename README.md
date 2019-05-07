@@ -2,6 +2,11 @@ App for SurfYogaBeer Fitness Classes
 
 ##Demo 
 
+You can find the demo here to learn how to use the site: 
+https://drive.google.com/open?id=19f-h4w24c9L_XsoRdlafXdBr4K5bWItk
+
+Please note, this app is still a work in progress and may be subject to changes. 
+
 ##Contributing to SYB App requests, features, and bug reports are always welcome on GitHub at <>. This project follows the Contributor Covenant's Code of Conduct for Open Source Projects.
 
 ##License Copyright 2019 Chris Tompkins
