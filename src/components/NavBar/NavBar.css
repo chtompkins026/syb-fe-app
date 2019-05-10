@@ -1,6 +1,8 @@
 .navbar {
-  display: grid; 
-  grid-template-columns: repeat(7, 1fr);
+  display: grid;
+  grid-template-areas: "logo checkbox menu";
+  grid-template-columns: 200px 1px auto;
+  grid-template-rows: 50px;
   background: #26a0da;
   height: 50px;
   width: 100%;
@@ -11,19 +13,16 @@
 
 .navbar-menu {
   display: flex;
-  list-style-type: none;
-  grid-column: -1;
+  grid-area: menu;
   justify-items: center;
   align-content: center;
-  grid-column-start: 3;
-  grid-column-end: 8;
+  grid-column-start: 4;
 }
 
 .navbar-link {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
   font-size: 1.2em;
   text-transform: uppercase;
-  
 }
 
 .navlinks {
@@ -35,8 +34,61 @@
   border-bottom: 1px solid white;
 }
 
-.nav-image{
-  align-self: center;
-  justify-self: center;
-  width: 20%; 
+.nav-image {
+  grid-area: logo;
+  max-width: 100%;
+  max-height: 100%;
 }
+
+.ham-toggle {
+  grid-area: checkbox;
+  justify-self: right;
+  align-self: center;
+  padding: 15px;
+  margin-right: 20px;
+  font-size: 30px;
+  height: 100%;
+  visibility: hidden;
+}
+
+.hamburger-menu {
+  grid-area: checkbox;
+  display: none;
+}
+
+
+@media screen and (max-width: 800px) {
+  .navbar {
+    display: grid;
+    grid-template-areas:  "logo checkbox"
+                          "menu menu";
+    grid-template-rows: 50px 1fr;
+    grid-template-columns: 20% 80%;
+    background: #26a0da;
+    height: 50px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .navbar-menu {
+    display: flex;
+    grid-area: menu;
+    list-style-type: none;
+    flex-direction: column;
+    width: 100%;
+    grid-column-start: 1;
+    background: var(--blue);
+  }
+
+  .hamburger-menu:checked ~ .navbar-menu {
+    display: none;
+  }
+
+  .ham-toggle {
+    visibility: visible;
+    cursor: pointer;
+  }
+}
+

@@ -1,6 +1,7 @@
 :root {
   --yellow: #ffc600;
   --black: #272727;
+  --blue: #26a0da;
 }
 
 html {
@@ -24,16 +25,6 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
-}
-
-body {
-  background-image: linear-gradient(110deg, #283048, #859398);
-  background-size: cover;
-  min-height: calc(100vh - 100px);
-  margin: 50px;
-  /* background: white; */
-  background-attachment: fixed;
-  letter-spacing: -1px;
 }
 
 h1,

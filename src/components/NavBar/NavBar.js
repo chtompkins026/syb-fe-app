@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import "./NavBar.css";
 
 const NavBar = () => {
-  const client = localStorage.getItem("clientID"); 
+  const client = localStorage.getItem("clientID");
 
   return (
     <div className="navbar">
-        <img className="nav-image" src={"favicon.png"} alt="SYB Logo" />
+      <img className="nav-image" src={"favicon.png"} alt="SYB Logo" />
+      <label for="checkbox" class="ham-toggle" >🍔</label>
+      <input type="checkbox" class="hamburger-menu" id="checkbox" />
       <li className="navbar-menu">
         <ul className="navbar-link 1">
           <Link to="/" className="navlinks"> Home </Link>
@@ -23,19 +25,19 @@ const NavBar = () => {
           <Link to="/instructors" className="navlinks"> Instructors </Link>
         </ul>
         {client ? (
-        <ul className="navbar-link 5">
-          <Link to="/dashboard" className="navlinks"> Dashboard </Link>
-        </ul>
-      ) : (
-        <Fragment>
-        <ul className="navbar-link 6">
-          <Link to="/login" className="navlinks"> Login </Link>
-        </ul>
-        <ul className="navbar-link 7">
-          <Link to="/signup" className="navlinks"> Sign Up </Link>
-        </ul>
-        </Fragment>
-      )}
+          <ul className="navbar-link 5">
+            <Link to="/dashboard" className="navlinks"> Dashboard </Link>
+          </ul>
+        ) : (
+            <Fragment>
+              <ul className="navbar-link 6">
+                <Link to="/login" className="navlinks"> Login </Link>
+              </ul>
+              <ul className="navbar-link 7">
+                <Link to="/signup" className="navlinks"> Sign Up </Link>
+              </ul>
+            </Fragment>
+          )}
       </li>
     </div>
   );
