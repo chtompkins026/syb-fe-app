@@ -1,14 +1,19 @@
 .navbar {
-  display: grid;
-  grid-template-areas: "logo checkbox menu";
-  grid-template-columns: 200px 1px auto;
-  grid-template-rows: 50px;
   background: #26a0da;
   height: 50px;
   width: 100%;
   position: absolute;
   top: 0;
   z-index: 10;
+}
+
+.navbar-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-areas: "logo checkbox checkbox menu";
+  grid-template-columns: 50px minmax(auto, 600px) auto;
+  grid-template-rows: 50px;
 }
 
 .navbar-menu {
@@ -58,7 +63,7 @@
 
 
 @media screen and (max-width: 800px) {
-  .navbar {
+  .navbar-inner {
     display: grid;
     grid-template-areas:  "logo checkbox"
                           "menu menu";
