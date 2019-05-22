@@ -5,16 +5,16 @@ import "./ListFilter.css";
 
 class ListFilter extends Component {
   state = {
-    currentItem: "Select a region..",
+    currentItem: this.props.defaultValue || "Select a value...",
     isOpen: false
   };
 
   render() {
-    const { options, setFilter } = this.props;
+    const { options, setFilter, className } = this.props;
     const { currentItem, isOpen } = this.state;
 
     return (
-      <div className="dropdown-container">
+      <div className={`dropdown-container ${className}`} >
         <div
         className="dropdown-selected"
         onClick={() =>
