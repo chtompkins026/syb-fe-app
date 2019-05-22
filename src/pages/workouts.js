@@ -137,11 +137,11 @@ const Workouts = ({ history, clientData }) => {
         <CalendarGrid>
           <CalendarItem> Monday </CalendarItem>
           <CalendarItem> Tuesady </CalendarItem>
-          <CalendarItem> Wed </CalendarItem>
-          <CalendarItem> Thu </CalendarItem>
-          <CalendarItem> Fri </CalendarItem>
-          <CalendarItem> SAt </CalendarItem>
-          <CalendarItem> Sun </CalendarItem>
+          <CalendarItem> Wednesday </CalendarItem>
+          <CalendarItem> Thursday </CalendarItem>
+          <CalendarItem> Friday </CalendarItem>
+          <CalendarItem> Saturday </CalendarItem>
+          <CalendarItem> Sunday </CalendarItem>
 
           {week.map((date, i) => {
             const schedules = allSchedules.filter(schedule => {
