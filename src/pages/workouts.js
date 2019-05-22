@@ -8,7 +8,16 @@ import { connect } from 'react-redux';
 
 import ListFilter from "../components/ListFilter/ListFilter";
 
+const HeaderContent = styled.div`
+  margin-top: 30px;
+`;
+
+const StyledListFilter = styled(ListFilter)`
+  margin-top: 50px;
+`;
+
 const WorkoutsGrid = styled.div`
+  margin-top: 50px; 
   display: grid;
   grid-template-columns: 100px auto;
 `;
@@ -27,7 +36,15 @@ const CalendarGrid = styled.div`
 
 const CalendarItem = styled.div`
   height: 80px;
-  border: 1px solid black;
+  border-right: 1px solid rgba(0, 0, 0, 0.8); 
+  text-transform: uppercase; 
+  font-size: 14px; 
+  color: var(--gray);
+  :hover {
+    ${(props) => props.hoverable && `background: red;`};
+  }
+  
+  ${(props) => props.hoverable && `background: gray;`};
 `;
 
 const ModalContainer = styled.div`
@@ -121,22 +138,30 @@ const Workouts = ({ history, clientData }) => {
 
   return (
     <div>
-      <ListFilter
+      <HeaderContent>
+        <h1> WEEKLY SCHEDULE </h1> 
+        <p>PLEASE CANCEL AT LEAST 12 HOURS IN ADVANCE OF YOUR SCHEDULED CLASS TIME TO AVOID LOSING YOUR CLASS CREDIT. </p>
+        <p> Late cancellations and no shows will result in a forfeiture of a class credit in your account. </p>
+        <p> 8 day advance booking* opens every Sunday at 4 PM, and sessions will only be available to advance book for the subsequent 8 days, Monday - Monday.</p> 
+      </HeaderContent> 
+    
+      <StyledListFilter
         options={allWorkoutTitles}
         setFilter={filter => setWorkoutFilter(filter)}
+        defaultValue={"Select a workout..."}
       />
       <WorkoutsGrid>
         <HoursGrid>
-          <CalendarItem> HOUR / DAY </CalendarItem>
+          <CalendarItem> </CalendarItem>
           {scheduleHours.map(hour => (
             <CalendarItem>
-              {hour.toLocaleString(DateTime.DATETIME_SHORT)}
+              {hour.toLocaleString(DateTime.TIME_SIMPLE)}
             </CalendarItem>
           ))}
         </HoursGrid>
         <CalendarGrid>
           <CalendarItem> Monday </CalendarItem>
-          <CalendarItem> Tuesady </CalendarItem>
+          <CalendarItem> Tuesday </CalendarItem>
           <CalendarItem> Wednesday </CalendarItem>
           <CalendarItem> Thursday </CalendarItem>
           <CalendarItem> Friday </CalendarItem>
@@ -153,7 +178,7 @@ const Workouts = ({ history, clientData }) => {
             });
 
             return (
-              <CalendarItem>
+              <CalendarItem hoverable={schedules.length > 0}>
                 {schedules.map(schedule => {
                   return (
                     <div>
