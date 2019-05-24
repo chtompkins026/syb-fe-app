@@ -2,7 +2,9 @@
   --yellow: #ffc600;
   --black: #272727;
   --blue: #26a0da;
-  --gray: #525151; 
+  --gray:	rgb(120,120,120); 
+  --lgray:rgb(232,232,232); 
+  --dgray: rgb(192,192,192); 
 }
 
 html {
