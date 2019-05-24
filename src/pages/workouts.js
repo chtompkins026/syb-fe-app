@@ -41,10 +41,10 @@ const CalendarItem = styled.div`
   font-size: 14px; 
   color: var(--gray);
   :hover {
-    ${(props) => props.hoverable && `background: red;`};
+    ${(props) => props.hoverable && `background: var(--blue);`};
   }
   
-  ${(props) => props.hoverable && `background: gray;`};
+  ${(props) => props.hoverable && `background: var(--dgray);`};
 `;
 
 const ModalContainer = styled.div`
