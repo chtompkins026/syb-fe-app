@@ -21,5 +21,6 @@
     "statusBar.background": "#420963",
     "statusBarItem.hoverBackground": "#610d92",
     "statusBar.foreground": "#e7e7e7"
-  }
+  },
+  "eslint.enable": true
 }
