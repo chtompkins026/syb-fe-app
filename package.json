@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "lodash.groupby": "^4.6.0",
     "lodash.map": "^4.6.0",
+    "lodash.sortby": "^4.7.0",
     "luxon": "^1.12.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",

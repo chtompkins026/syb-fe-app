@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { DateTime } from "luxon";
 import map from "lodash.map";
 import { Portal } from "react-portal";
+import groupBy from 'lodash.groupby';
+import sortBy from 'lodash.sortby';
 import { connect } from 'react-redux';
 
 import ListFilter from "../components/ListFilter/ListFilter";
@@ -31,8 +33,13 @@ const HoursGrid = styled.div`
 const CalendarGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(14, 1fr);
+  grid-template-rows: 100px 600px;
 `;
+
+const DayOfTheWeek = styled.div`
+  display: flex;
+  flex-flow: column;
+`
 
 const CalendarItem = styled.div`
   height: 80px;
@@ -73,8 +80,9 @@ const Workouts = ({ history, clientData }) => {
 
   useEffect(() => {
     axiosInstance
-      .get(`/api/workouts`)
+      .get(`/api/schedules`)
       .then(res => {
+        console.log("This is the response schedules data", res.data);
         setWorkouts(res.data);
       })
       .catch(err => {
@@ -83,29 +91,37 @@ const Workouts = ({ history, clientData }) => {
   }, []);
 
   const beginningOfWeek = DateTime.local().startOf("week");
+  console.log("this is the beginning of the week", beginningOfWeek);
 
-  const week = Array.from({ length: 7 })
-    .map((_, i) => beginningOfWeek.plus({ day: i }))
-    .map(day =>
-      Array.from({ length: 14 }).map((el, i) => day.plus({ hours: i + 8 }))
-    )
-    .flat();
 
-  const scheduleHours = Array.from({ length: 14 }).map((el, i) =>
-    DateTime.local()
-      .startOf("day")
-      .plus({ hours: i + 8 })
-  );
+  // TODO: still need to fix:
+  // - filtering
+  // - navigating days of the week
+  // - add time for workout block
+  // 
+  const mappedSchedules = workouts.map(workout => ({
+    dayOfTheWeek: DateTime.fromISO(workout.start).toFormat('cccc'),
+    weekNumber: DateTime.fromISO(workout.start).toFormat('W'),
+    ...workout
+  }));
 
-  const allSchedules = workouts
-    .filter(workout => {
-      if (workoutFilter === "") return true;
-      return workout.name === workoutFilter;
-    })
-    .map(workout => workout.schedules)
-    .flat();
+  const groupedSchedules = groupBy(mappedSchedules, 'dayOfTheWeek')
 
-  const allWorkoutTitles = map(workouts, "name");
+  const weeklySchedule = Array.from({ length: 7 })
+     .map((_, i) => beginningOfWeek.plus({ day: i }).toFormat('cccc'))
+     .map(day => groupedSchedules[day] ? sortBy(groupedSchedules[day], [(o) =>  DateTime.fromISO(o.start).toMillis() ]) : [])
+     
+  console.log(weeklySchedule);
+
+  // const allSchedules = workouts
+  //   .filter(workout => {
+  //     if (workoutFilter === "") return true;
+  //     return workout.name === workoutFilter;
+  //   })
+  //   .map(workout => workout.schedules)
+  //   .flat();
+
+  const allWorkoutTitles = map(workouts, "name"); //map imported from loDash 
   const currentWorkout = workouts.filter(workout => {
     if (workoutFilter === "") return true;
     return workout.name === workoutFilter;
@@ -127,7 +143,7 @@ const Workouts = ({ history, clientData }) => {
     axiosInstance
       .post("/api/bookings", booking)
       .then(res => {
-        console.log(res.data);
+        console.log("This is the response data", res.data);
         setConfirmModalOpen(false);
         history.push("/dashboard");
       })
@@ -153,11 +169,11 @@ const Workouts = ({ history, clientData }) => {
       <WorkoutsGrid>
         <HoursGrid>
           <CalendarItem> </CalendarItem>
-          {scheduleHours.map(hour => (
+          {/*scheduleHours.map(hour => (
             <CalendarItem>
               {hour.toLocaleString(DateTime.TIME_SIMPLE)}
             </CalendarItem>
-          ))}
+          ))*/}
         </HoursGrid>
         <CalendarGrid>
           <CalendarItem> Monday </CalendarItem>
@@ -167,20 +183,12 @@ const Workouts = ({ history, clientData }) => {
           <CalendarItem> Friday </CalendarItem>
           <CalendarItem> Saturday </CalendarItem>
           <CalendarItem> Sunday </CalendarItem>
-
-          {week.map((date, i) => {
-            const schedules = allSchedules.filter(schedule => {
-              const scheduleStart = DateTime.fromISO(schedule.start);
-
-              return (
-                scheduleStart >= date && scheduleStart < date.plus({ hours: 1 })
-              );
-            });
-
-            return (
-              <CalendarItem hoverable={schedules.length > 0}>
-                {schedules.map(schedule => {
-                  return (
+          
+          {weeklySchedule.map(dayOfTheWeek => (
+            <DayOfTheWeek>
+              {dayOfTheWeek.map(schedule => (
+                <CalendarItem hoverable={true}>
+              
                     <div>
                       {schedule.title}
                       <button
@@ -213,11 +221,11 @@ const Workouts = ({ history, clientData }) => {
                         </Portal>
                       )}
                     </div>
-                  );
-                })}
+                
               </CalendarItem>
-            );
-          })}
+              ))}
+            </DayOfTheWeek>
+          ))}
         </CalendarGrid>
       </WorkoutsGrid>
     </div>
