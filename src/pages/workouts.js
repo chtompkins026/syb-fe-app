@@ -5,10 +5,12 @@ import { DateTime } from "luxon";
 import map from "lodash.map";
 import { Portal } from "react-portal";
 import groupBy from 'lodash.groupby';
+import uniq from 'lodash.uniq';
 import sortBy from 'lodash.sortby';
 import { connect } from 'react-redux';
 
 import ListFilter from "../components/ListFilter/ListFilter";
+import { readFile } from "fs";
 
 const HeaderContent = styled.div`
   margin-top: 30px;
@@ -90,10 +92,6 @@ const Workouts = ({ history, clientData }) => {
       });
   }, []);
 
-  const beginningOfWeek = DateTime.local().startOf("week");
-  console.log("this is the beginning of the week", beginningOfWeek);
-
-
   // TODO: still need to fix:
   // - filtering
   // - navigating days of the week
@@ -104,12 +102,19 @@ const Workouts = ({ history, clientData }) => {
     weekNumber: DateTime.fromISO(workout.start).toFormat('W'),
     ...workout
   }));
+  
+  const currentWorkouts = mappedSchedules.filter(workout => {
+    if (workoutFilter === "") return true;
+    return workout.title === workoutFilter;
+  });
 
-  const groupedSchedules = groupBy(mappedSchedules, 'dayOfTheWeek')
+  const sortedSchedules = sortBy(currentWorkouts, [(o) =>  DateTime.fromISO(o.start).toMillis() ])
+  const groupedSchedules = groupBy(sortedSchedules, 'dayOfTheWeek')
 
+  const beginningOfWeek = DateTime.local().startOf("week");
   const weeklySchedule = Array.from({ length: 7 })
      .map((_, i) => beginningOfWeek.plus({ day: i }).toFormat('cccc'))
-     .map(day => groupedSchedules[day] ? sortBy(groupedSchedules[day], [(o) =>  DateTime.fromISO(o.start).toMillis() ]) : [])
+     .map(day => groupedSchedules[day] || [])
      
   console.log(weeklySchedule);
 
@@ -121,17 +126,13 @@ const Workouts = ({ history, clientData }) => {
   //   .map(workout => workout.schedules)
   //   .flat();
 
-  const allWorkoutTitles = map(workouts, "name"); //map imported from loDash 
-  const currentWorkout = workouts.filter(workout => {
-    if (workoutFilter === "") return true;
-    return workout.name === workoutFilter;
-  });
+  const allWorkoutTitles = uniq(map(workouts, "title")); //map imported from loDash 
 
   const confirmBooking = schedule => {
     const booking = {
       status: "confirmed",
       title: "booking",
-      cost: currentWorkout.cost,
+      cost: schedule.workout.cost,
       start: schedule.start,
       cancellation_reason: null,
       refunded: null,
@@ -191,6 +192,8 @@ const Workouts = ({ history, clientData }) => {
               
                     <div>
                       {schedule.title}
+                      {DateTime.fromISO(schedule.start).setZone('utc').toFormat('t')}
+                      
                       <button
                         onClick={() => {
                           setConfirmModalOpen(true);
